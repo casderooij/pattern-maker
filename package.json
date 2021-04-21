@@ -1,0 +1,21 @@
+{
+  "name": "pattern-maker",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "start": "svelte-kit start"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "next",
+    "@sveltejs/adapter-static": "^1.0.0-next.4",
+    "@sveltejs/kit": "next",
+    "sass": "^1.32.11",
+    "svelte": "^3.29.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0",
+    "vite": "^2.1.0"
+  },
+  "type": "module"
+}
