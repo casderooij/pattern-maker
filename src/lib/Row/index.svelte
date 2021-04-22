@@ -4,6 +4,8 @@
 
   export let pattern;
   export let index;
+
+  console.log(processPattern(pattern));
 </script>
 
 <g transform="translate(0, {index * $store.rowMargin})">
@@ -11,7 +13,7 @@
     <g transform="translate({sequence.x * $store.colWidth}, 0)">
       {#if sequence.state === 1}
         <rect
-          width={sequence.length * $store.rowHeight}
+          width={sequence.length * $store.colWidth}
           height={$store.rowHeight}
           rx={$store.rowHeight / 2}
         />

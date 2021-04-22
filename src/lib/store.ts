@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 
 export default writable({
-  rowCount: 5,
+  rowCount: 14,
   rowMargin: 28,
   rowHeight: 14,
-  colCount: 6,
+  colCount: 30,
   colWidth: 14,
 });
