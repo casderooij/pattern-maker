@@ -1,1 +1,1 @@
-# Pattern Maker
+# Slot Pattern Tool
