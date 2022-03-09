@@ -1,57 +1,30 @@
-<script>
-  import Row from '$lib/Row/index.svelte';
+<script lang="ts">
+  import Row from '$lib/Row.svelte';
   import store from '$lib/store';
-  import * as random from 'canvas-sketch-util/random';
-  import { mapRange } from 'canvas-sketch-util/math';
+  import createPattern from '$lib/createPattern';
 
-  const rows = $store.rowCount;
-  const cols = $store.colCount;
+  export let rows = 4;
+  export let cols = 4;
+  export let seed = 25;
+  export let threshold = 0.5;
+  export let frequency = 0.2;
 
-  let seed = 25;
-  let threshold = 0.5;
+  $: pattern = createPattern({ rows, cols, seed, threshold, frequency });
 
-  function createPattern(t, s) {
-    random.setSeed(s);
-    const pattern = [];
-    for (let i = 0; i < rows; i++) {
-      const rowPattern = [];
-      for (let j = 0; j < cols; j++) {
-        let n = random.noise2D(i, j, 0.2, 1);
-        n = mapRange(n, -1, 1, 0, 1);
-        if (n < t) {
-          rowPattern.push(0);
-        } else {
-          rowPattern.push(1);
-        }
-      }
-      pattern.push(rowPattern);
-    }
-    return pattern;
-  }
-
-  $: pattern = createPattern(threshold, seed);
-
-  function svgHeight() {
-    return (
-      $store.rowCount * ($store.rowHeight + $store.rowMargin / 2) -
-      $store.rowMargin / 2
-    );
-  }
-
-  function svgWidth() {
-    return $store.colCount * $store.colWidth;
-  }
+  const svgHeight =
+    rows * ($store.rowHeight + $store.rowMargin / 2) - $store.rowMargin / 2;
+  const svgWidth = cols * $store.colWidth;
 </script>
 
 <div class="container">
   <div class="seed">
     <p>seed:</p>
-    <input class="input_seed" type="text" bind:value={seed} />
+    <input class="input_seed" type="number" bind:value={seed} />
   </div>
 
-  <svg width={svgWidth()} height={svgHeight()}>
+  <svg width={svgWidth} height={svgHeight}>
     {#each pattern as row, index}
-      <Row pattern={row} {index} />
+      <Row sequence={row} {index} />
     {/each}
   </svg>
   <input
@@ -96,11 +69,5 @@
   .input_range {
     margin-top: 20px;
     background: transparent;
-  }
-
-  svg {
-    /* width: 100%;
-    height: 100%; */
-    /* background-color: lightcoral; */
   }
 </style>

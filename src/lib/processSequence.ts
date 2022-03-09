@@ -4,7 +4,7 @@ interface Sequence {
   x: number;
 }
 
-export default function processPattern(
+export default function processSequence(
   [current, ...rest]: number[],
   prev?: number,
   array: Sequence[] = [],
@@ -14,9 +14,9 @@ export default function processPattern(
 
   if (prev !== current) {
     array = [...array, { state: current, length: 1, x }];
-    return processPattern(rest, current, array, (x += 1));
+    return processSequence(rest, current, array, (x += 1));
   }
 
   array[array.length - 1].length += 1;
-  return processPattern(rest, current, array, (x += 1));
+  return processSequence(rest, current, array, (x += 1));
 }
